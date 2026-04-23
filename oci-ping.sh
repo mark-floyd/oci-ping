@@ -34,10 +34,17 @@ if [ ! -f "$BINARY" ]; then
     elif command -v wget >/dev/null 2>&1; then
         wget -O "$BINARY" "$DOWNLOAD_URL"
     else
-        echo "Error: Neither curl nor vget found. Please install one to download the binary."
+        echo "Error: Neither curl nor wget found. Please install one to download the binary."
         exit 1
     fi
-    chmod +x "$BINARY"
+    
+    if [ $? -eq 0 ]; then
+        chmod +x "$BINARY"
+        echo "Download successful."
+    else
+        echo "Error: Download failed."
+        exit 1
+    fi
 fi
 
 # Execute the binary with all passed arguments
