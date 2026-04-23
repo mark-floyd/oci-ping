@@ -26,8 +26,8 @@ curl -sL https://raw.githubusercontent.com/mark-floyd/oci-ping/main/oci-ping.sh 
 
 您可以直接运行对应平台的二进制文件：
 
-- **Mac (ARM)**: `./oci-ping-cli-darwin-arm64`
 - **Windows**: 从 [Release 页面](https://github.com/mark-floyd/oci-ping/releases) 下载 `.exe` 文件，然后在终端中运行：`.\oci-ping-cli-win-x64.exe`
+- **Mac (ARM)**: `./oci-ping-cli-darwin-arm64`
 - **Linux**: `./oci-ping-cli-linux-x64` (或 `linux-arm64`)
 
 ## 命令行参数
