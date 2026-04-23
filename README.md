@@ -14,13 +14,12 @@
 
 ## 安装与运行
 
-### 使用脚本 (Mac/Linux)
+### 一键运行 (Mac/Linux)
 
-项目根目录提供了一个 `oci-ping.sh` 脚本，可以自动检测您的系统并运行对应的二进制文件：
+如果您不想手动下载，可以使用以下命令直接运行（建议使用 sudo 以确保 Linux 下的 ICMP 权限）：
 
 ```bash
-chmod +x oci-ping.sh
-./oci-ping.sh -n 5
+curl -sL https://raw.githubusercontent.com/mark-floyd/oci-ping/main/oci-ping.sh | sudo bash
 ```
 
 ### 直接运行二进制文件
@@ -28,8 +27,8 @@ chmod +x oci-ping.sh
 您可以直接运行对应平台的二进制文件：
 
 - **Mac (ARM)**: `./oci-ping-cli-darwin-arm64`
-- **Windows**: `oci-ping-cli-win-x64.exe` (建议以管理员权限运行以支持 ICMP)
-- **Linux**: `./oci-ping-cli-linux-x64`
+- **Windows**: 从 [Release 页面](https://github.com/mark-floyd/oci-ping/releases) 下载 `.exe` 文件，然后在终端中运行：`.\oci-ping-cli-win-x64.exe`
+- **Linux**: `./oci-ping-cli-linux-x64` (或 `linux-arm64`)
 
 ## 命令行参数
 

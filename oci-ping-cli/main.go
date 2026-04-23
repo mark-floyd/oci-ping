@@ -54,9 +54,7 @@ func main() {
 	}
 
 	fmt.Printf("Successfully loaded %d regions. Starting ICMP pings (%d per region)...\n", len(regions), *pingCount)
-	if runtime.GOOS == "windows" {
-		fmt.Println("Note: On Windows, this tool may require Administrator privileges.")
-	} else if runtime.GOOS == "linux" {
+	if runtime.GOOS == "linux" {
 		fmt.Println("Note: On Linux, this tool may require sudo.")
 	}
 	fmt.Println("")
