@@ -8,8 +8,13 @@ BINARY=""
 DOWNLOAD_URL=""
 
 if [ "$OS" = "Darwin" ]; then
-    BINARY="oci-ping-cli-darwin-arm64"
-    DOWNLOAD_URL="https://github.com/mark-floyd/oci-ping/releases/latest/download/oci-ping-cli-darwin-arm64"
+    if [ "$ARCH" = "arm64" ]; then
+        BINARY="oci-ping-cli-darwin-arm64"
+        DOWNLOAD_URL="https://github.com/mark-floyd/oci-ping/releases/latest/download/oci-ping-cli-darwin-arm64"
+    else
+        echo "Error: macOS on x86_64 (Intel) is not supported at this time."
+        exit 1
+    fi
 elif [ "$OS" = "Linux" ]; then
     if [ "$ARCH" = "x86_64" ]; then
         BINARY="oci-ping-cli-linux-x64"
