@@ -30,21 +30,29 @@ fi
 if [ ! -f "$BINARY" ]; then
     echo "Binary $BINARY not found. Downloading from $DOWNLOAD_URL..."
     if command -v curl >/dev/null 2>&1; then
-        curl -L -o "$BINARY" "$DOWNLOAD_URL"
+        curl -L -f -o "$BINARY" "$DOWNLOAD_URL"
     elif command -v wget >/dev/null 2>&1; then
-        wget -O "$BINARY" "$DOWNLOAD_URL"
+        wget -q --show-progress -O "$BINARY" "$DOWNLOAD_URL"
     else
-        echo "Error: Neither curl nor wget found. Please install one to download the binary."
+        echo "Error: Neither curl nor wget found."
         exit 1
     fi
     
-    if [ $? -eq 0 ]; then
-        chmod +x "$BINARY"
-        echo "Download successful."
-    else
-        echo "Error: Download failed."
+    if [ $? -ne 0 ]; then
+        echo "Error: Download failed. The release might not exist or the asset name is incorrect."
+        rm -f "$BINARY" # Remove the error page/failed download
         exit 1
     fi
+
+    # Check if the file is actually a binary (or at least not a text/html error page)
+    if grep -q "Not Found" "$BINARY" 2>/dev/null || grep -q "<!DOCTYPE html>" "$BINARY" 2>/dev/null; then
+        echo "Error: Downloaded file is an error page, not a binary. Please check if the release exists on GitHub."
+        rm -f "$BINARY"
+        exit 1
+    fi
+
+    chmod +x "$BINARY"
+    echo "Download successful."
 fi
 
 # Execute the binary with all passed arguments
