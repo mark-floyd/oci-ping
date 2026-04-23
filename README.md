@@ -27,7 +27,7 @@ chmod +x oci-ping.sh
 
 您可以直接运行对应平台的二进制文件：
 
-- **Mac (ARM)**: `./oci-ping-cli-darwin-arm`
+- **Mac (ARM)**: `./oci-ping-cli-darwin-arm64`
 - **Windows**: `oci-ping-cli-win-x64.exe` (建议以管理员权限运行以支持 ICMP)
 - **Linux**: `./oci-ping-cli-linux-x64`
 

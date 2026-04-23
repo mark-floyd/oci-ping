@@ -22,7 +22,7 @@ jobs:
       - name: Build Mac ARM
         run: |
           cd oci-ping-cli
-          GOOS=darwin GOARCH=arm64 go build -o ../oci-ping-cli-darwin-arm
+          GOOS=darwin GOARCH=arm64 go build -o ../oci-ping-cli-darwin-arm64
 
       - name: Build Windows x64
         run: |
@@ -44,7 +44,7 @@ jobs:
         with:
           tag_name: ${{ github.ref_name }}
           files: |
-            oci-ping-cli-darwin-arm
+            oci-ping-cli-darwin-arm64
             oci-ping-cli-win-x64.exe
             oci-ping-cli-linux-x64
             oci-ping-cli-linux-arm64

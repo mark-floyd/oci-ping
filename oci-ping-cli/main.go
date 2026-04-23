@@ -55,7 +55,9 @@ func main() {
 
 	fmt.Printf("Successfully loaded %d regions. Starting ICMP pings (%d per region)...\n", len(regions), *pingCount)
 	if runtime.GOOS == "windows" {
-		fmt.Println("Note: On Windows, this tool may require Administrator privileges for ICMP pings.")
+		fmt.Println("Note: On Windows, this tool may require Administrator privileges.")
+	} else if runtime.GOOS == "linux" {
+		fmt.Println("Note: On Linux, this tool may require sudo.")
 	}
 	fmt.Println("")
 
@@ -127,8 +129,10 @@ func main() {
 		csvWriter.Write([]string{"Region Name", "Continent", "Average (ms)", "Median (ms)", "Minimum (ms)", "Maximum (ms)"})
 	}
 
+	errorCount := 0
 	for _, res := range results {
 		if res.Error != nil {
+			errorCount++
 			if *verbose {
 				table.Append([]string{
 					res.Region.RegionName,
@@ -180,6 +184,14 @@ func main() {
 	}
 
 	table.Render()
+
+	if errorCount > 0 && !*verbose {
+		fmt.Printf("\nNote: %d regions failed to respond. Use -v for details.\n", errorCount)
+		if runtime.GOOS == "linux" {
+			fmt.Println("Try running with sudo.")
+		}
+	}
+
 	if csvFile != nil {
 		fmt.Printf("\nResults saved to %s\n", csvFileName)
 	}
@@ -211,7 +223,6 @@ func loadRegions(location string) ([]Region, error) {
 
 	if strings.HasPrefix(location, "http://") || strings.HasPrefix(location, "https://") {
 		fmt.Printf("Reading regions.json from %s\n", location)
-		// Load from URL
 		resp, err := http.Get(location)
 		if err != nil {
 			return nil, err
@@ -227,7 +238,6 @@ func loadRegions(location string) ([]Region, error) {
 			return nil, err
 		}
 	} else {
-		// Load from local file
 		body, err = os.ReadFile(location)
 		if err != nil {
 			return nil, err
@@ -249,7 +259,10 @@ func pingHost(host string, count int) (PingStats, error) {
 		return PingStats{}, err
 	}
 
-	if runtime.GOOS == "windows" {
+	// Windows requires privileged mode for ICMP.
+	// Linux often requires privileged mode unless ping_group_range is set.
+	// macOS can use unprivileged UDP ICMP.
+	if runtime.GOOS == "windows" || runtime.GOOS == "linux" {
 		pinger.SetPrivileged(true)
 	} else {
 		pinger.SetPrivileged(false)
