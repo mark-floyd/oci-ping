@@ -8,8 +8,8 @@ BINARY=""
 DOWNLOAD_URL=""
 
 if [ "$OS" = "Darwin" ]; then
-    BINARY="oci-ping-cli-mac-arm"
-    DOWNLOAD_URL="https://github.com/mark-floyd/oci-ping/releases/latest/download/oci-ping-cli-mac-arm"
+    BINARY="oci-ping-cli-darwin-arm"
+    DOWNLOAD_URL="https://github.com/mark-floyd/oci-ping/releases/latest/download/oci-ping-cli-darwin-arm"
 elif [ "$OS" = "Linux" ]; then
     if [ "$ARCH" = "x86_64" ]; then
         BINARY="oci-ping-cli-linux-x64"
