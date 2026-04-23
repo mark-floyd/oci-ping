@@ -47,6 +47,7 @@ func main() {
 	verbose := flag.Bool("v", false, "enable verbose output")
 	pingCount := flag.Int("n", 10, "number of pings to each region")
 	regionsList := flag.String("regions-list", "https://ghfast.top/raw.githubusercontent.com/mark-floyd/oci-ping/refs/heads/main/regions.json", "path or URL to the regions JSON file")
+	saveCSV := flag.Bool("save", false, "save results to a CSV file")
 	flag.Parse()
 
 	fmt.Printf("OCI Ping CLI (%s/%s)\n", runtime.GOOS, runtime.GOARCH)
@@ -108,26 +109,28 @@ func main() {
 		return results[i].Stats.Avg < results[j].Stats.Avg
 	})
 
-	// Prepare table and CSV
+	// Prepare table
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"Region Name", "Continent", "Average", "Median", "Minimum", "Maximum", "Packet Loss"})
 	table.SetBorder(true)
 	table.SetAutoWrapText(false)
 
-	timestamp := time.Now().Format("2006-01-02T15-04-05")
-	csvFileName := fmt.Sprintf("%s-results.csv", timestamp)
-	csvFile, err := os.Create(csvFileName)
-	if err != nil {
-		log.Printf("Warning: Could not create %s: %v", csvFileName, err)
-	} else {
-		defer csvFile.Close()
-	}
-
 	var csvWriter *csv.Writer
-	if csvFile != nil {
-		csvWriter = csv.NewWriter(csvFile)
-		defer csvWriter.Flush()
-		csvWriter.Write([]string{"Region Name", "Continent", "Average (ms)", "Median (ms)", "Minimum (ms)", "Maximum (ms)", "Packet Loss (%)"})
+	var csvFile *os.File
+	var csvFileName string
+
+	if *saveCSV {
+		timestamp := time.Now().Format("2006-01-02T15-04-05")
+		csvFileName = fmt.Sprintf("%s-results.csv", timestamp)
+		csvFile, err = os.Create(csvFileName)
+		if err != nil {
+			log.Printf("Warning: Could not create %s: %v", csvFileName, err)
+		} else {
+			defer csvFile.Close()
+			csvWriter = csv.NewWriter(csvFile)
+			defer csvWriter.Flush()
+			csvWriter.Write([]string{"Region Name", "Continent", "Average (ms)", "Median (ms)", "Minimum (ms)", "Maximum (ms)", "Packet Loss (%)"})
+		}
 	}
 
 	lossCount := 0
@@ -140,7 +143,7 @@ func main() {
 				otherErrorCount++
 			}
 
-			// Always show in table and CSV, even if error
+			// Always show in table, and CSV if enabled
 			table.Append([]string{
 				res.Region.RegionName,
 				res.Region.RegionContinent,

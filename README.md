@@ -36,6 +36,7 @@ bash <(curl -sL https://ghfast.top/raw.githubusercontent.com/mark-floyd/oci-ping
 
 - `-n`: 每个区域的 ping 次数（默认为 10）。
 - `--regions-list`: 指定区域 JSON 文件的路径或 URL。
+- `--save`: 将结果保存为带时间戳的 CSV 文件。
 - `-v`: 启用详细输出。
 
 ## 延迟颜色说明 (终端)
