@@ -59,7 +59,7 @@ func main() {
 
 	fmt.Printf("Successfully loaded %d regions. Starting ICMP pings (%d per region)...\n", len(regions), *pingCount)
 	if runtime.GOOS == "linux" {
-		fmt.Println("Note: On Linux, this tool may require sudo.")
+		fmt.Println("Note: On Linux, this tool may require root privilege.")
 	}
 	fmt.Println("")
 
@@ -214,7 +214,7 @@ func main() {
 		}
 		fmt.Printf("Note: %d %s encountered during pings. Use -v for details.\n", otherErrorCount, errWord)
 		if runtime.GOOS == "linux" {
-			fmt.Println("Try running with sudo.")
+			fmt.Println("Try running as the root user.")
 		}
 	}
 
