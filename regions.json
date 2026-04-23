@@ -162,12 +162,6 @@
     "regionContinent": "Middle East"
   },
   {
-    "regionName": "Serbia Central (Jovanovac)",
-    "regionLocation": "Jovanovac,Serbia",
-    "pingUrl": "objectstorage.eu-jovanovac-1.oraclecloud.com",
-    "regionContinent": "Europe"
-  },
-  {
     "regionName": "Singapore (Singapore)",
     "regionLocation": "Singapore,Singapore",
     "pingUrl": "objectstorage.ap-singapore-1.oraclecloud.com",
