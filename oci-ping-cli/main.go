@@ -140,13 +140,13 @@ func main() {
 				otherErrorCount++
 			}
 
-			if *verbose {
-				table.Append([]string{
-					res.Region.RegionName,
-					res.Region.RegionContinent,
-					"Error", "Error", "Error", "Error", "100.00%",
-				})
-			}
+			// Always show in table and CSV, even if error
+			table.Append([]string{
+				res.Region.RegionName,
+				res.Region.RegionContinent,
+				"Error", "Error", "Error", "Error", "100.00%",
+			})
+
 			if csvWriter != nil {
 				csvWriter.Write([]string{res.Region.RegionName, res.Region.RegionContinent, "Error", "Error", "Error", "Error", "100.00"})
 			}
@@ -176,7 +176,7 @@ func main() {
 			getColor(res.Stats.Med),
 			getColor(res.Stats.Min),
 			getColor(res.Stats.Max),
-			getLossColor(res.Stats.PacketLoss),
+			{}, // Packet Loss (no color)
 		}
 		table.Rich(tableRow, colors)
 
@@ -231,19 +231,6 @@ func getColor(d time.Duration) tablewriter.Colors {
 		return tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiYellowColor}
 	} else if ms < 300 {
 		return tablewriter.Colors{tablewriter.Bold, tablewriter.FgYellowColor}
-	} else {
-		return tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiRedColor}
-	}
-}
-
-func getLossColor(loss float64) tablewriter.Colors {
-	if runtime.GOOS == "windows" {
-		return tablewriter.Colors{}
-	}
-	if loss == 0 {
-		return tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiGreenColor}
-	} else if loss < 20 {
-		return tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiYellowColor}
 	} else {
 		return tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiRedColor}
 	}
