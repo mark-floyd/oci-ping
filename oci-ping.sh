@@ -49,3 +49,8 @@ fi
 
 # Execute the binary with all passed arguments
 ./"$BINARY" "$@"
+
+# Cleanup: delete the binary after running
+if [ -f "$BINARY" ]; then
+    rm -f "$BINARY"
+fi
