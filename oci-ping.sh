@@ -35,9 +35,9 @@ fi
 if [ ! -f "$BINARY" ]; then
     echo "Binary $BINARY not found. Downloading from $DOWNLOAD_URL..."
     if command -v curl >/dev/null 2>&1; then
-        curl -L -f -o "$BINARY" "$DOWNLOAD_URL"
+        curl -L -f -s -o "$BINARY" "$DOWNLOAD_URL"
     elif command -v wget >/dev/null 2>&1; then
-        wget -q --show-progress -O "$BINARY" "$DOWNLOAD_URL"
+        wget -q -O "$BINARY" "$DOWNLOAD_URL"
     else
         echo "Error: Neither curl nor wget found."
         exit 1
@@ -45,13 +45,17 @@ if [ ! -f "$BINARY" ]; then
     
     if [ $? -ne 0 ]; then
         echo "Error: Download failed. The release might not exist or the asset name is incorrect."
-        rm -f "$BINARY" # Remove the error page/failed download
+        rm -f "$BINARY"
         exit 1
     fi
 
-    # Check if the file is actually a binary (or at least not a text/html error page)
-    if grep -q "Not Found" "$BINARY" 2>/dev/null || grep -q "<!DOCTYPE html>" "$BINARY" 2>/dev/null; then
-        echo "Error: Downloaded file is an error page, not a binary. Please check if the release exists on GitHub."
+    # More robust binary check: Check for ELF or Mach-O magic numbers
+    # Linux ELF: \x7fELF
+    # Mac Mach-O: \xcf\xfa\xed\xfe or \xce\xfa\xed\xfe
+    MAGIC=$(head -c 4 "$BINARY" | xxd -p 2>/dev/null || od -t x1 -N 4 "$BINARY" | head -n 1 | cut -d' ' -f2-5 | tr -d ' ' 2>/dev/null)
+    
+    if [[ "$MAGIC" != "7f454c46" && "$MAGIC" != "cffaedfe" && "$MAGIC" != "cefaedfe" && "$MAGIC" != "feedface" && "$MAGIC" != "feedfacf" ]]; then
+        echo "Error: Downloaded file is not a valid binary (Magic: $MAGIC). It might be an error page."
         rm -f "$BINARY"
         exit 1
     fi
