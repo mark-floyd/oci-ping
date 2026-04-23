@@ -1,0 +1,272 @@
+[
+  {
+    "regionName": "Australia East (Sydney)",
+    "regionLocation": "Sydney, Australia",
+    "pingUrl": "objectstorage.ap-sydney-1.oraclecloud.com",
+    "regionContinent": "Asia Pacific"
+  },
+  {
+    "regionName": "Australia Southeast (Melbourne)",
+    "regionLocation": "Melbourne, Australia",
+    "pingUrl": "objectstorage.ap-melbourne-1.oraclecloud.com",
+    "regionContinent": "Asia Pacific"
+  },
+  {
+    "regionName": "Brazil East (Sao Paulo)",
+    "regionLocation": "Sao Paulo, Brazil",
+    "pingUrl": "objectstorage.sa-saopaulo-1.oraclecloud.com",
+    "regionContinent": "South America"
+  },
+  {
+    "regionName": "Brazil Southeast (Vinhedo)",
+    "regionLocation": "Vinhedo, Brazil",
+    "pingUrl": "objectstorage.sa-vinhedo-1.oraclecloud.com",
+    "regionContinent": "South America"
+  },
+  {
+    "regionName": "Canada Southeast (Montreal)",
+    "regionLocation": "Montreal, Canada",
+    "pingUrl": "objectstorage.ca-montreal-1.oraclecloud.com",
+    "regionContinent": "North America"
+  },
+  {
+    "regionName": "Canada Southeast (Toronto)",
+    "regionLocation": "Toronto, Canada",
+    "pingUrl": "objectstorage.ca-toronto-1.oraclecloud.com",
+    "regionContinent": "North America"
+  },
+  {
+    "regionName": "Chile Central (Santiago)",
+    "regionLocation": "Santiago, Chile",
+    "pingUrl": "objectstorage.sa-santiago-1.oraclecloud.com",
+    "regionContinent": "South America"
+  },
+  {
+    "regionName": "Chile West (Valparaiso)",
+    "regionLocation": "Valparaiso, Chile",
+    "pingUrl": "objectstorage.sa-valparaiso-1.oraclecloud.com",
+    "regionContinent": "South America"
+  },
+  {
+    "regionName": "Colombia Central (Bogota)",
+    "regionLocation": "Bogota, Colombia",
+    "pingUrl": "objectstorage.sa-bogota-1.oraclecloud.com",
+    "regionContinent": "South America"
+  },
+  {
+    "regionName": "France Central (Paris)",
+    "regionLocation": "Paris, France",
+    "pingUrl": "objectstorage.eu-paris-1.oraclecloud.com",
+    "regionContinent": "Europe"
+  },
+  {
+    "regionName": "France South (Marseille)",
+    "regionLocation": "Marseille, France",
+    "pingUrl": "objectstorage.eu-marseille-1.oraclecloud.com",
+    "regionContinent": "Europe"
+  },
+  {
+    "regionName": "Germany Central (Frankfurt)",
+    "regionLocation": "Frankfurt, Germany",
+    "pingUrl": "objectstorage.eu-frankfurt-1.oraclecloud.com",
+    "regionContinent": "Europe"
+  },
+  {
+    "regionName": "India South (Hyderabad)",
+    "regionLocation": "Hyderabad, India",
+    "pingUrl": "objectstorage.ap-hyderabad-1.oraclecloud.com",
+    "regionContinent": "Asia Pacific"
+  },
+  {
+    "regionName": "India West (Mumbai)",
+    "regionLocation": "Mumbai, India",
+    "pingUrl": "objectstorage.ap-mumbai-1.oraclecloud.com",
+    "regionContinent": "Asia Pacific"
+  },
+  {
+    "regionName": "Indonesia North (Batam)",
+    "regionLocation": "Batam, Indonesia",
+    "pingUrl": "objectstorage.ap-batam-1.oraclecloud.com",
+    "regionContinent": "Asia Pacific"
+  },
+  {
+    "regionName": "Israel Central (Jerusalem)",
+    "regionLocation": "Jerusalem, Israel",
+    "pingUrl": "objectstorage.il-jerusalem-1.oraclecloud.com",
+    "regionContinent": "Middle East"
+  },
+  {
+    "regionName": "Italy Northwest (Milan)",
+    "regionLocation": "Milan, Italy",
+    "pingUrl": "objectstorage.eu-milan-1.oraclecloud.com",
+    "regionContinent": "Europe"
+  },
+  {
+    "regionName": "Italy North (Turin)",
+    "regionLocation": "Turin, Italy",
+    "pingUrl": "objectstorage.eu-turin-1.oraclecloud.com",
+    "regionContinent": "Europe"
+  },
+  {
+    "regionName": "Japan Central (Osaka)",
+    "regionLocation": "Osaka, Japan",
+    "pingUrl": "objectstorage.ap-osaka-1.oraclecloud.com",
+    "regionContinent": "Asia Pacific"
+  },
+  {
+    "regionName": "Japan East (Tokyo)",
+    "regionLocation": "Tokyo, Japan",
+    "pingUrl": "objectstorage.ap-tokyo-1.oraclecloud.com",
+    "regionContinent": "Asia Pacific"
+  },
+  {
+    "regionName": "Malaysia West 2 (Kulai)",
+    "regionLocation": "Kulai, Malaya",
+    "pingUrl": "objectstorage.ap-kulai-2.oraclecloud.com",
+    "regionContinent": "Asia Pacific"
+  },
+  {
+    "regionName": "Mexico Central (Queretaro)",
+    "regionLocation": "Queretaro, Mexico",
+    "pingUrl": "objectstorage.mx-queretaro-1.oraclecloud.com",
+    "regionContinent": "North America"
+  },
+  {
+    "regionName": "Mexico Northeast (Monterrey)",
+    "regionLocation": "Monterrey, Mexico",
+    "pingUrl": "objectstorage.mx-monterrey-1.oraclecloud.com",
+    "regionContinent": "North America"
+  },
+  {
+    "regionName": "Morocco West (Casablanca)",
+    "regionLocation": "Casablanca, Morocco",
+    "pingUrl": "objectstorage.af-casablanca-1.oraclecloud.com",
+    "regionContinent": "Africa"
+  },
+  {
+    "regionName": "Netherlands Northwest (Amsterdam)",
+    "regionLocation": "Amsterdam, Netherlands",
+    "pingUrl": "objectstorage.eu-amsterdam-1.oraclecloud.com",
+    "regionContinent": "Europe"
+  },
+  {
+    "regionName": "Saudi Arabia Central (Riyadh)",
+    "regionLocation": "Riyadh, Saudi Arabia",
+    "pingUrl": "objectstorage.me-riyadh-1.oraclecloud.com",
+    "regionContinent": "Middle East"
+  },
+  {
+    "regionName": "Saudi Arabia West (Jeddah)",
+    "regionLocation": "Jeddah, Saudi Arabia",
+    "pingUrl": "objectstorage.me-jeddah-1.oraclecloud.com",
+    "regionContinent": "Middle East"
+  },
+  {
+    "regionName": "Serbia Central (Jovanovac)",
+    "regionLocation": "Jovanovac,Serbia",
+    "pingUrl": "objectstorage.eu-jovanovac-1.oraclecloud.com",
+    "regionContinent": "Europe"
+  },
+  {
+    "regionName": "Singapore (Singapore)",
+    "regionLocation": "Singapore,Singapore",
+    "pingUrl": "objectstorage.ap-singapore-1.oraclecloud.com",
+    "regionContinent": "Asia Pacific"
+  },
+  {
+    "regionName": "Singapore West (Singapore)",
+    "regionLocation": "Singapore,Singapore",
+    "pingUrl": "objectstorage.ap-singapore-2.oraclecloud.com",
+    "regionContinent": "Asia Pacific"
+  },
+  {
+    "regionName": "South Africa Central (Johannesburg)",
+    "regionLocation": "Johannesburg, South Africa",
+    "pingUrl": "objectstorage.af-johannesburg-1.oraclecloud.com",
+    "regionContinent": "Africa"
+  },
+  {
+    "regionName": "South Korea Central (Seoul)",
+    "regionLocation": "Seoul, South Korea",
+    "pingUrl": "objectstorage.ap-seoul-1.oraclecloud.com",
+    "regionContinent": "Asia Pacific"
+  },
+  {
+    "regionName": "South Korea North (Chuncheon)",
+    "regionLocation": "Chuncheon, South Korea",
+    "pingUrl": "objectstorage.ap-chuncheon-1.oraclecloud.com",
+    "regionContinent": "Asia Pacific"
+  },
+  {
+    "regionName": "Spain Central (Madrid)",
+    "regionLocation": "Madrid, Spain",
+    "pingUrl": "objectstorage.eu-madrid-1.oraclecloud.com",
+    "regionContinent": "Europe"
+  },
+  {
+    "regionName": "Spain Central (Madrid 3)",
+    "regionLocation": "Madrid, Spain",
+    "pingUrl": "objectstorage.eu-madrid-3.oraclecloud.com",
+    "regionContinent": "Europe"
+  },
+  {
+    "regionName": "Sweden Central (Stockholm)",
+    "regionLocation": "Stockholm, Sweden",
+    "pingUrl": "objectstorage.eu-stockholm-1.oraclecloud.com",
+    "regionContinent": "Europe"
+  },
+  {
+    "regionName": "Switzerland North (Zurich)",
+    "regionLocation": "Zurich, Switzerland",
+    "pingUrl": "objectstorage.eu-zurich-1.oraclecloud.com",
+    "regionContinent": "Europe"
+  },
+  {
+    "regionName": "UAE Central (Abu Dhabi)",
+    "regionLocation": "Abu Dhabi, UAE",
+    "pingUrl": "objectstorage.me-abudhabi-1.oraclecloud.com",
+    "regionContinent": "Middle East"
+  },
+  {
+    "regionName": "UAE East (Dubai)",
+    "regionLocation": "Dubai, UAE",
+    "pingUrl": "objectstorage.me-dubai-1.oraclecloud.com",
+    "regionContinent": "Middle East"
+  },
+  {
+    "regionName": "UK South (London)",
+    "regionLocation": "London, United Kingdom",
+    "pingUrl": "objectstorage.uk-london-1.oraclecloud.com",
+    "regionContinent": "Europe"
+  },
+  {
+    "regionName": "UK West (Newport)",
+    "regionLocation": "Newport, United Kingdom",
+    "pingUrl": "objectstorage.uk-cardiff-1.oraclecloud.com",
+    "regionContinent": "Europe"
+  },
+  {
+    "regionName": "US East (Ashburn)",
+    "regionLocation": "Ashburn, VA",
+    "pingUrl": "objectstorage.us-ashburn-1.oraclecloud.com",
+    "regionContinent": "North America"
+  },
+  {
+    "regionName": "US Midwest (Chicago)",
+    "regionLocation": "Chicago, IL",
+    "pingUrl": "objectstorage.us-chicago-1.oraclecloud.com",
+    "regionContinent": "North America"
+  },
+  {
+    "regionName": "US West (Phoenix)",
+    "regionLocation": "Phoenix, AZ",
+    "pingUrl": "objectstorage.us-phoenix-1.oraclecloud.com",
+    "regionContinent": "North America"
+  },
+  {
+    "regionName": "US West (San Jose)",
+    "regionLocation": "San Jose, CA",
+    "pingUrl": "objectstorage.us-sanjose-1.oraclecloud.com",
+    "regionContinent": "North America"
+  }
+]
