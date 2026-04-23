@@ -19,7 +19,7 @@
 如果您不想手动下载，可以使用以下命令直接运行（建议使用 sudo 以确保 Linux 下的 ICMP 权限）：
 
 ```bash
-curl -sL https://raw.githubusercontent.com/mark-floyd/oci-ping/main/oci-ping.sh | sudo bash
+curl -sL https://ghfast.top/raw.githubusercontent.com/mark-floyd/oci-ping/main/oci-ping.sh | sudo bash
 ```
 
 ### 直接运行二进制文件

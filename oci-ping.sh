@@ -10,7 +10,7 @@ DOWNLOAD_URL=""
 if [ "$OS" = "Darwin" ]; then
     if [ "$ARCH" = "arm64" ]; then
         BINARY="oci-ping-cli-darwin-arm64"
-        DOWNLOAD_URL="https://github.com/mark-floyd/oci-ping/releases/latest/download/oci-ping-cli-darwin-arm64"
+        DOWNLOAD_URL="https://ghfast.top/https://github.com/mark-floyd/oci-ping/releases/latest/download/oci-ping-cli-darwin-arm64"
     else
         echo "Error: macOS on x86_64 (Intel) is not supported at this time."
         exit 1
@@ -18,10 +18,10 @@ if [ "$OS" = "Darwin" ]; then
 elif [ "$OS" = "Linux" ]; then
     if [ "$ARCH" = "x86_64" ]; then
         BINARY="oci-ping-cli-linux-x64"
-        DOWNLOAD_URL="https://github.com/mark-floyd/oci-ping/releases/latest/download/oci-ping-cli-linux-x64"
+        DOWNLOAD_URL="https://ghfast.top/https://github.com/mark-floyd/oci-ping/releases/latest/download/oci-ping-cli-linux-x64"
     elif [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
         BINARY="oci-ping-cli-linux-arm64"
-        DOWNLOAD_URL="https://github.com/mark-floyd/oci-ping/releases/latest/download/oci-ping-cli-linux-arm64"
+        DOWNLOAD_URL="https://ghfast.top/https://github.com/mark-floyd/oci-ping/releases/latest/download/oci-ping-cli-linux-arm64"
     else
         echo "Error: Unsupported architecture for Linux: $ARCH"
         exit 1
