@@ -28,10 +28,11 @@ type Region struct {
 }
 
 type PingStats struct {
-	Avg time.Duration
-	Min time.Duration
-	Max time.Duration
-	Med time.Duration
+	Avg        time.Duration
+	Min        time.Duration
+	Max        time.Duration
+	Med        time.Duration
+	PacketLoss float64
 }
 
 type PingResult struct {
@@ -39,6 +40,8 @@ type PingResult struct {
 	Stats  PingStats
 	Error  error
 }
+
+const errNoPackets = "no packets received"
 
 func main() {
 	verbose := flag.Bool("v", false, "enable verbose output")
@@ -107,7 +110,7 @@ func main() {
 
 	// Prepare table and CSV
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"Region Name", "Continent", "Average", "Median", "Minimum", "Maximum"})
+	table.SetHeader([]string{"Region Name", "Continent", "Average", "Median", "Minimum", "Maximum", "Packet Loss"})
 	table.SetBorder(true)
 	table.SetAutoWrapText(false)
 
@@ -124,22 +127,28 @@ func main() {
 	if csvFile != nil {
 		csvWriter = csv.NewWriter(csvFile)
 		defer csvWriter.Flush()
-		csvWriter.Write([]string{"Region Name", "Continent", "Average (ms)", "Median (ms)", "Minimum (ms)", "Maximum (ms)"})
+		csvWriter.Write([]string{"Region Name", "Continent", "Average (ms)", "Median (ms)", "Minimum (ms)", "Maximum (ms)", "Packet Loss (%)"})
 	}
 
-	errorCount := 0
+	lossCount := 0
+	otherErrorCount := 0
 	for _, res := range results {
 		if res.Error != nil {
-			errorCount++
+			if res.Error.Error() == errNoPackets {
+				lossCount++
+			} else {
+				otherErrorCount++
+			}
+
 			if *verbose {
 				table.Append([]string{
 					res.Region.RegionName,
 					res.Region.RegionContinent,
-					"Error", "Error", "Error", "Error",
+					"Error", "Error", "Error", "Error", "100.00%",
 				})
 			}
 			if csvWriter != nil {
-				csvWriter.Write([]string{res.Region.RegionName, res.Region.RegionContinent, "Error", "Error", "Error", "Error"})
+				csvWriter.Write([]string{res.Region.RegionName, res.Region.RegionContinent, "Error", "Error", "Error", "Error", "100.00"})
 			}
 			continue
 		}
@@ -148,6 +157,7 @@ func main() {
 		minVal := formatDuration(res.Stats.Min)
 		maxVal := formatDuration(res.Stats.Max)
 		medVal := formatDuration(res.Stats.Med)
+		lossVal := fmt.Sprintf("%.2f%%", res.Stats.PacketLoss)
 
 		// Console Table
 		tableRow := []string{
@@ -157,6 +167,7 @@ func main() {
 			medVal + " ms",
 			minVal + " ms",
 			maxVal + " ms",
+			lossVal,
 		}
 
 		colors := []tablewriter.Colors{
@@ -165,6 +176,7 @@ func main() {
 			getColor(res.Stats.Med),
 			getColor(res.Stats.Min),
 			getColor(res.Stats.Max),
+			getLossColor(res.Stats.PacketLoss),
 		}
 		table.Rich(tableRow, colors)
 
@@ -177,14 +189,27 @@ func main() {
 				medVal,
 				minVal,
 				maxVal,
+				fmt.Sprintf("%.2f", res.Stats.PacketLoss),
 			})
 		}
 	}
 
 	table.Render()
 
-	if errorCount > 0 && !*verbose {
-		fmt.Printf("\nNote: %d regions failed to respond. Use -v for details.\n", errorCount)
+	if lossCount > 0 && !*verbose {
+		regionWord := "region"
+		if lossCount > 1 {
+			regionWord = "regions"
+		}
+		fmt.Printf("\nNote: %d %s failed to respond. Use -v for details.\n", lossCount, regionWord)
+	}
+
+	if otherErrorCount > 0 && !*verbose {
+		errWord := "error"
+		if otherErrorCount > 1 {
+			errWord = "errors"
+		}
+		fmt.Printf("Note: %d %s encountered during pings. Use -v for details.\n", otherErrorCount, errWord)
 		if runtime.GOOS == "linux" {
 			fmt.Println("Try running with sudo.")
 		}
@@ -206,6 +231,19 @@ func getColor(d time.Duration) tablewriter.Colors {
 		return tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiYellowColor}
 	} else if ms < 300 {
 		return tablewriter.Colors{tablewriter.Bold, tablewriter.FgYellowColor}
+	} else {
+		return tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiRedColor}
+	}
+}
+
+func getLossColor(loss float64) tablewriter.Colors {
+	if runtime.GOOS == "windows" {
+		return tablewriter.Colors{}
+	}
+	if loss == 0 {
+		return tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiGreenColor}
+	} else if loss < 20 {
+		return tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiYellowColor}
 	} else {
 		return tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiRedColor}
 	}
@@ -257,9 +295,6 @@ func pingHost(host string, count int) (PingStats, error) {
 		return PingStats{}, err
 	}
 
-	// Windows requires privileged mode for ICMP.
-	// Linux often requires privileged mode unless ping_group_range is set.
-	// macOS can use unprivileged UDP ICMP.
 	if runtime.GOOS == "windows" || runtime.GOOS == "linux" {
 		pinger.SetPrivileged(true)
 	} else {
@@ -281,7 +316,7 @@ func pingHost(host string, count int) (PingStats, error) {
 
 	stats := pinger.Statistics()
 	if stats.PacketsRecv == 0 {
-		return PingStats{}, fmt.Errorf("no packets received")
+		return PingStats{}, fmt.Errorf(errNoPackets)
 	}
 
 	sort.Slice(rtts, func(i, j int) bool {
@@ -299,9 +334,10 @@ func pingHost(host string, count int) (PingStats, error) {
 	}
 
 	return PingStats{
-		Avg: stats.AvgRtt,
-		Min: stats.MinRtt,
-		Max: stats.MaxRtt,
-		Med: median,
+		Avg:        stats.AvgRtt,
+		Min:        stats.MinRtt,
+		Max:        stats.MaxRtt,
+		Med:        median,
+		PacketLoss: stats.PacketLoss,
 	}, nil
 }

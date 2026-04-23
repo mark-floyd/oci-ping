@@ -16,11 +16,13 @@
 
 ### 一键运行 (Mac/Linux)
 
-如果您不想手动下载，可以使用以下命令直接运行（建议使用 sudo 以确保 Linux 下的 ICMP 权限）：
+如果您不想手动下载，可以使用以下命令直接运行（如果遇到权限问题，请切换到 root 用户执行）：
 
 ```bash
-curl -sL https://ghfast.top/raw.githubusercontent.com/mark-floyd/oci-ping/main/oci-ping.sh | sudo bash
+bash <(curl -sL https://ghfast.top/raw.githubusercontent.com/mark-floyd/oci-ping/main/oci-ping.sh)
 ```
+
+> **注意**：Linux 用户通常需要以 root 用户身份运行。
 
 ### 直接运行二进制文件
 
