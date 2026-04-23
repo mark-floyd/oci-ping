@@ -34,6 +34,11 @@ jobs:
           cd oci-ping-cli
           GOOS=linux GOARCH=amd64 go build -o ../oci-ping-cli-linux-x64
 
+      - name: Build Linux ARM64
+        run: |
+          cd oci-ping-cli
+          GOOS=linux GOARCH=arm64 go build -o ../oci-ping-cli-linux-arm64
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
@@ -42,5 +47,6 @@ jobs:
             oci-ping-cli-darwin-arm
             oci-ping-cli-win-x64.exe
             oci-ping-cli-linux-x64
+            oci-ping-cli-linux-arm64
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

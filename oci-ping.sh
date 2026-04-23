@@ -14,8 +14,11 @@ elif [ "$OS" = "Linux" ]; then
     if [ "$ARCH" = "x86_64" ]; then
         BINARY="oci-ping-cli-linux-x64"
         DOWNLOAD_URL="https://github.com/mark-floyd/oci-ping/releases/latest/download/oci-ping-cli-linux-x64"
+    elif [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
+        BINARY="oci-ping-cli-linux-arm64"
+        DOWNLOAD_URL="https://github.com/mark-floyd/oci-ping/releases/latest/download/oci-ping-cli-linux-arm64"
     else
-        echo "Error: Only x86_64 is supported for Linux at this time."
+        echo "Error: Unsupported architecture for Linux: $ARCH"
         exit 1
     fi
 else
@@ -31,7 +34,7 @@ if [ ! -f "$BINARY" ]; then
     elif command -v wget >/dev/null 2>&1; then
         wget -O "$BINARY" "$DOWNLOAD_URL"
     else
-        echo "Error: Neither curl nor wget found. Please install one to download the binary."
+        echo "Error: Neither curl nor vget found. Please install one to download the binary."
         exit 1
     fi
     chmod +x "$BINARY"
