@@ -212,7 +212,8 @@ func getColor(d time.Duration) tablewriter.Colors {
 	} else if ms < 200 {
 		return tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiYellowColor}
 	} else if ms < 300 {
-		return tablewriter.Colors{tablewriter.Bold, tablewriter.FgYellowColor}
+		// ANSI 256-color orange (38;5;208)
+		return tablewriter.Colors{tablewriter.Bold, 38, 5, 208}
 	} else {
 		return tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiRedColor}
 	}
