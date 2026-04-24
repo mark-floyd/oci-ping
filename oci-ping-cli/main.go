@@ -51,6 +51,8 @@ func main() {
 			fmt.Println("\n")
 		}),
 	)
+	// Force the bar to render immediately at 0/total
+	bar.RenderBlank()
 
 	resultsChan := make(chan PingResult, len(regions))
 	var wg sync.WaitGroup

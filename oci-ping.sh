@@ -33,7 +33,7 @@ fi
 
 # Download binary if it doesn't exist
 if [ ! -f "$BINARY" ]; then
-    echo "Binary $BINARY not found. Downloading from $DOWNLOAD_URL..."
+    echo "Downloading binary from $DOWNLOAD_URL..."
     if command -v curl >/dev/null 2>&1; then
         curl -L -f -s -o "$BINARY" "$DOWNLOAD_URL"
     elif command -v wget >/dev/null 2>&1; then
