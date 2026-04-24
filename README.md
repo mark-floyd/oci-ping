@@ -2,6 +2,8 @@
 
 一个用于测试 Oracle Cloud Infrastructure (OCI) 各个区域网络延迟的 Go 语言命令行工具。
 
+![OCI Ping CLI results screenshot](assets/Results-Screenshot.png)
+
 ## 功能特点
 
 - **多平台支持**：支持 macOS (ARM), Windows (x64), Linux (x86_64) 和 Linux (ARM64)。
